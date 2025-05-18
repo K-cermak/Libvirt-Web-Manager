@@ -1,0 +1,85 @@
+@include("partials/head")
+<script src="{{ env("BASE_URL") }}/public/main.js" defer></script>
+
+<body>
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center min-vh-100">
+            @include("partials/header")
+
+            <div class="container-fluid">
+                <div class="row full-height">
+                    <div class="col-4 p-3 left-panel">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-end">
+                                <button href="{{ route('dashboard') }}" class="btn btn-primary refreshButton"><i class="bi bi-arrow-clockwise"></i> Refresh</button>
+                            </li>
+
+                            <div class="domainList"></div>
+                        </ul>
+                    </div>
+
+                    <div class="col-8 p-3 right-panel text-center">
+                        <p class="lead domainName">Select domain first</p>
+                        <div class="domainDetails d-none">
+                        <div class="mb-3 text-center">
+                            <p>
+                                State: <span class="detailState"></span><br>
+                                Memory: <span class="detailMemory"></span><br>
+                                CPUs: <span class="detailCpus"></span>
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-center gap-2 flex-wrap">
+                            <button class="btn btn-success startButton"><i class="bi bi-database-fill-up"></i> Start</button>
+                            <button class="btn btn-danger shutdownButton"><i class="bi bi-power"></i> Shutdown</button>
+                            <button class="btn btn-warning suspendButton"><i class="bi bi-box-arrow-in-down"></i> Suspend</button>
+                            <button class="btn btn-info resumeButton"><i class="bi bi-box-arrow-up"></i> Resume</button>
+                            <button class="btn btn-dark destroyButton"><i class="bi bi-plug"></i> Destroy</button>
+                        </div>
+
+                        <div class="row mx-auto my-2 justify-content-center mt-5">
+                            <div class="card text-center" style="width: 18rem;">
+                                <i class="bi bi-database-add mt-3"></i>
+                                <div class="card-body">
+                                    <a class="btn btn-primary stretched-link plugDrive">Plug Drive</a>
+                                </div>
+                            </div>
+
+                            <div class="card text-center" style="width: 18rem;">
+                                <i class="bi bi-database-slash mt-3"></i>
+                                <div class="card-body">
+                                    <button class="btn btn-primary stretched-link unplugDrive">Unplug Drive</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+            @include("partials/footer")
+        </div>
+    </div>
+
+    <style>
+        .full-height {
+            height: 83vh;
+        }
+        .left-panel {
+            height: 100%;
+            overflow-y: auto;
+            border-right: 1px solid #ccc;
+        }
+        .right-panel {
+            height: 100%;
+            overflow: hidden;
+        }
+        .card > .bi {
+            font-size: 2.5em;
+        }
+        .flash-container {
+            z-index: 9999;
+        }
+    </style>
+
+</body>
+</html>

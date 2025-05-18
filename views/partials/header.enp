@@ -1,0 +1,30 @@
+<header class="p-0">
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid align-items-center">
+            <div>
+                <h1 class="d-flex align-items-center m-0"><a class="navbar-brand" href="/">{{ env("APP_NAME") }}</a></h1>
+                @if ($connectionUri != "")
+                    <p class="m-0 text-light">Connected to: <strong>{{ $connectionUri }}</strong></p>
+                @endif
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                @if ($connectionUri != "")
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="/dashboard/connect"><i class="bi bi-pencil-square"></i> Change Connection URI</a>
+                        </li>
+                    </ul>
+                @endif
+
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold" href="/dashboard/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,85 @@
+@include("partials/head")
+
+<body>
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center min-vh-100">
+            <div class="col-md-9 col-lg-6 col-xl-5 image">
+                <img src="{{ env("BASE_URL") }}/public/img/homepage.svg" class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <h2 class="mb-5 mainText">Please, login to the {{ env("APP_NAME") }}.</h2>
+                
+                <div class="floating-label-group mt-5">
+                    <input type="password" id="token" name="token" class="form-control" required />
+                    <label class="floating-label">Token</label>
+                </div>
+
+                <div class="text-center text-lg-start mt-4 pt-2">
+                    <button type="submit" class="btn btn-primary px-5 submitButton">Login</button>
+                </div>
+            </div>
+
+            @include("partials/footer")
+        </div>
+    </div>
+
+    <script>
+        document.querySelector(".submitButton").addEventListener("click", function() {
+            const token = document.querySelector("#token").value;
+            axios.post("/auth", {
+                token: token
+            })
+            .then(function (response) {
+                window.location.reload();
+            })
+            .catch(function (error) {
+                if (error.response.status == 403) {
+                    genFlashMessage("ERROR: Invalid login token", "error", 5000);
+                } else {
+                    genFlashMessage("ERROR: An error occurred while trying to login", "error", 5000);
+                }
+            });
+        });
+    </script>
+
+    <style>
+        .floating-label-group {
+            position: relative;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+
+        .floating-label-group .floating-label {
+            font-size: 13px;
+            color: #595959;
+            position: absolute;
+            pointer-events: none;
+            top: 9px;
+            left: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .floating-label-group input:focus ~ .floating-label,
+        .floating-label-group input:not(:focus):valid ~ .floating-label {
+            top: -30px;
+            bottom: 0px;
+            left: 0px;
+            font-size: 15px;
+            opacity: 1;
+            color: #343434;
+        }
+
+        @media (max-width:991px) {
+            .image {
+                display: none;
+            }
+            .mainText, footer {
+                text-align: center;
+            }
+            footer {
+                justify-content: center !important;
+            }
+        }
+    </style>
+</body>
+</html>

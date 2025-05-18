@@ -1,0 +1,38 @@
+@include("partials/head")
+
+<body>
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center min-vh-100">
+            @include("partials/header")
+            
+            <div class="col-4">
+                <div class="mb-3">
+                    <label for="connectionUri" class="form-label">Connection URI</label>
+                    <input type="text" class="form-control" id="connectionUri" name="connectionUri" placeholder="qemu:///system" value="qemu:///system" required>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary w-100 submitButton">Connect</button>
+                </div>
+            </div>
+
+            @include("partials/footer")
+        </div>
+    </div>
+
+    <script>
+        document.querySelector(".submitButton").addEventListener("click", function() {
+            const connectionUri = document.querySelector("#connectionUri").value;
+            axios.post("/dashboard/connect", {
+                connectionUri: connectionUri
+            })
+            .then(function (response) {
+                window.location.href = "/dashboard";
+            })
+            .catch(function (error) {
+                genFlashMessage("ERROR: An error occurred while trying to set Connection URI", "error", 5000);
+            });
+        });
+    </script>
+
+</body>
+</html>
