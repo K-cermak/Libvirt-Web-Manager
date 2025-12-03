@@ -4,7 +4,8 @@ By Karel Cermak | [Karlosoft](https://karlosoft.com).
 
 ## About
 
-- Experimental project for school project to manage virtual machines using Libvirt and PHP.
+- Experimental project to manage virtual machines using Libvirt and PHP in Browser.
+- Developed for a school project.
 - The project is **not** intended for production use and is not affiliated with Libvirt or Red Hat, Inc.
 
 <br>
